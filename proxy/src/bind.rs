@@ -160,7 +160,7 @@ impl<C, B> Bind<C, B> {
     //     &self.ctx
     // }
 
-    pub fn executor(&self) -> &Handle {
+    pub fn executor(&self) -> &TaskExecutor {
         &self.executor
     }
 
