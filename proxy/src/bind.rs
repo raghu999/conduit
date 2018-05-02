@@ -8,7 +8,7 @@ use std::sync::atomic::AtomicUsize;
 use futures::{Future, Poll};
 use futures::future::Map;
 use http::{self, uri};
-use tokio::reactor::Handle;
+use tokio::runtime::TaskExecutor;
 use tower_service as tower;
 use tower_h2;
 use tower_reconnect::Reconnect;
@@ -32,7 +32,7 @@ use transport;
 pub struct Bind<C, B> {
     ctx: C,
     sensors: telemetry::Sensors,
-    executor: Handle,
+    executor: TaskExecutor,
     req_ids: Arc<AtomicUsize>,
     _p: PhantomData<B>,
 }
@@ -113,7 +113,7 @@ impl Error for BufferSpawnError {
 }
 
 impl<B> Bind<(), B> {
-    pub fn new(executor: Handle) -> Self {
+    pub fn new(executor: TaskExecutor) -> Self {
         Self {
             executor,
             ctx: (),
