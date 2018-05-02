@@ -29,8 +29,7 @@ extern crate prost_types;
 extern crate quickcheck;
 extern crate rand;
 extern crate tokio_connect;
-extern crate tokio_core;
-extern crate tokio_io;
+extern crate tokio;
 extern crate tower_balance;
 extern crate tower_buffer;
 extern crate tower_discover;
@@ -53,7 +52,7 @@ use std::thread;
 use std::time::Duration;
 
 use indexmap::IndexSet;
-use tokio_core::reactor::{Core, Handle};
+use tokio::reactor::{Reactor, Handle};
 use tower_service::NewService;
 use tower_fn::*;
 use conduit_proxy_router::{Recognize, Router, Error as RouteError};
